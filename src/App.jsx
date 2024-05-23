@@ -5,13 +5,24 @@ import { dracula } from "react-syntax-highlighter/dist/esm/styles/hljs";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPaperPlane, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { motion } from "framer-motion";
+import Modal from 'react-modal';
+
+Modal.setAppElement('#root'); // Set app element for accessibility
 
 const App = () => {
   const [data, setData] = useState("");
   const [showData, setShowData] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
 
   const handleSubmit = async () => {
+    if (!content.value.trim()) {
+      setModalMessage("Message cannot be empty!");
+      setIsModalOpen(true);
+      return;
+    }
+  
     setLoading(true);
     const ai = await requestGroqAi(content.value);
     setData(ai);
@@ -19,10 +30,14 @@ const App = () => {
     setLoading(false);
   };
 
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <main className="bg-gray-100 min-h-screen flex items-center justify-center">
       <div className="bg-white p-8 rounded-lg shadow-md max-w-3xl w-full">
-        <h1 className="text-3xl font-bold mb-4 text-center text-blue-600">REACT GROQ AI</h1>
+        <h1 className="text-3xl font-bold mb-4 text-center text-blue-600">GANIPEDIA AI</h1>
         <input
           type="text"
           id="content"
@@ -60,6 +75,17 @@ const App = () => {
             </SyntaxHighlight>
           </motion.div>
         )}
+       <Modal
+          isOpen={isModalOpen}
+          onRequestClose={closeModal}
+          className="modal"
+          overlayClassName="overlay"
+        >
+          <div className="modal-content">
+            <h2>Error</h2>
+            <p>{modalMessage}</p>
+          </div>
+        </Modal>
       </div>
     </main>
   );

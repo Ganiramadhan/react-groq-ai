@@ -19,6 +19,7 @@
     "postcss-cli": "^11.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-modal": "^3.16.1",
     "react-syntax-highlighter": "^15.5.0"
   },
   "devDependencies": {
