@@ -7,7 +7,7 @@ import { faPaperPlane, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { motion } from "framer-motion";
 import Modal from 'react-modal';
 
-Modal.setAppElement('#root'); // Set app element for accessibility
+Modal.setAppElement('#root');
 
 const App = () => {
   const [data, setData] = useState("");
@@ -38,30 +38,36 @@ const App = () => {
     <main className="bg-gray-100 min-h-screen flex items-center justify-center">
       <div className="bg-white p-8 rounded-lg shadow-md max-w-3xl w-full">
         <h1 className="text-3xl font-bold mb-4 text-center text-blue-600">GANIPEDIA AI</h1>
-        <input
-          type="text"
-          id="content"
-          className="w-full border border-gray-300 rounded-md py-2 px-3 mb-4"
-          placeholder="Type your message..."
-        />
-        <button
-          className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600 flex items-center justify-center w-full"
-          type="button"
-          onClick={handleSubmit}
-          disabled={loading}
-        >
-          {loading ? (
-            <>
-              <span className="mr-2">Loading...</span>
-              <FontAwesomeIcon icon={faSpinner} spin />
-            </>
-          ) : (
-            <>
-              <span className="mr-2">Send Message</span>
-              <FontAwesomeIcon icon={faPaperPlane} />
-            </>
-          )}
-        </button>
+        <div className="flex items-start">
+          <div className="w-10/12">
+            <input
+              type="text"
+              id="content"
+              className="w-full border border-gray-300 rounded-md py-2 px-3 mb-4"
+              placeholder="Type your message..."
+            />
+          </div>
+          <div className="w-2/12 pl-2">
+            <button
+              className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600 flex items-center justify-center w-full"
+              type="button"
+              onClick={handleSubmit}
+              disabled={loading}
+            >
+              {loading ? (
+                <>
+                  <span className="mr-2">Loading...</span>
+                  <FontAwesomeIcon icon={faSpinner} spin />
+                </>
+              ) : (
+                <>
+                  <span className="mr-2">Send</span>
+                  <FontAwesomeIcon icon={faPaperPlane} />
+                </>
+              )}
+            </button>
+          </div>
+        </div>
         {showData && (
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
@@ -75,7 +81,7 @@ const App = () => {
             </SyntaxHighlight>
           </motion.div>
         )}
-       <Modal
+        <Modal
           isOpen={isModalOpen}
           onRequestClose={closeModal}
           className="modal"
