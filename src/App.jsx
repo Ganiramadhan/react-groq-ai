@@ -17,14 +17,15 @@ const App = () => {
   const [modalMessage, setModalMessage] = useState("");
 
   const handleSubmit = async () => {
-    if (!content.value.trim()) {
+    const content = document.getElementById("content").value;
+    if (!content.trim()) {
       setModalMessage("Message cannot be empty!");
       setIsModalOpen(true);
       return;
     }
   
     setLoading(true);
-    const ai = await requestGroqAi(content.value);
+    const ai = await requestGroqAi(content);
     setData(ai);
     setShowData(true);
     setLoading(false);
@@ -35,19 +36,18 @@ const App = () => {
   };
 
   return (
-    <main className="bg-gray-100 min-h-screen flex items-center justify-center">
+    <main className="bg-gray-100 min-h-screen flex items-center justify-center p-4">
       <div className="bg-white p-8 rounded-lg shadow-md max-w-3xl w-full">
         <h1 className="text-3xl font-bold mb-4 text-center text-blue-600">GANIPEDIA AI</h1>
-        <div className="flex items-start">
-          <div className="w-10/12">
-            <input
-              type="text"
+        <div className="flex flex-col sm:flex-row items-start">
+          <div className="w-full sm:w-10/12">
+            <textarea
               id="content"
-              className="w-full border border-gray-300 rounded-md py-2 px-3 mb-4"
+              className="w-full border border-gray-300 rounded-md py-2 px-3 mb-4 h-24"
               placeholder="Type your message..."
             />
           </div>
-          <div className="w-2/12 pl-2">
+          <div className="w-full sm:w-2/12 sm:pl-2">
             <button
               className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600 flex items-center justify-center w-full"
               type="button"
@@ -90,6 +90,9 @@ const App = () => {
           <div className="modal-content">
             <h2>Error</h2>
             <p>{modalMessage}</p>
+            <button onClick={closeModal} className="bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-600 mt-4">
+              Close
+            </button>
           </div>
         </Modal>
       </div>
