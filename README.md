@@ -17,8 +17,6 @@ To clone and run this project locally, follow these steps:
 
 Make sure you have [Node.js](https://nodejs.org/) and [npm](https://www.npmjs.com/) (or Yarn) installed on your machine.
 
-### Clone the Repository
-
 1. Open your terminal.
 2. Clone the repository using the following command:
    ```bash
@@ -42,7 +40,7 @@ Make sure you have [Node.js](https://nodejs.org/) and [npm](https://www.npmjs.co
    ```
    
 
-Your application should now be running at http://localhost:3000. Open this URL in your browser to see your project in action!
+Your application should now be running at http://localhost:5173. Open this URL in your browser to see your project.
 
 
    
